@@ -916,9 +916,9 @@ i {
   transform: scale(5);
   color: rgb(87, 124, 193);
   background-color: rgb(213, 236, 120);
-  border-radius: 0.1em; /* Rounded capsule */
+  opacity: 0.9;
   z-index: 10;
-  box-shadow: 0 0 20px rgb(249, 170, 255); 
+  box-shadow: 0 0 10px rgb(249, 170, 255); 
 }
 
 /* .color-1 {
