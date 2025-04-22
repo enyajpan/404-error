@@ -265,6 +265,7 @@ i {
   line-height: 0.75;
   letter-spacing: -0.2rem;
   max-width: 100%;
+  overflow: visible;
 }
 
 /* //////////////////////////////////////////////// */
@@ -895,3 +896,47 @@ i {
   height: auto;
   pointer-events: auto; /* allow clicks */
 }
+
+/* character animation */
+.wave-text {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+}
+
+.wave-text span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  z-index: 1;
+  line-height: 1;
+}
+
+.wave-text span:hover {
+  transform: scale(5);
+  color: rgb(87, 124, 193);
+  background-color: rgb(213, 236, 120);
+  border-radius: 0.1em; /* Rounded capsule */
+  z-index: 10;
+  box-shadow: 0 0 20px rgb(249, 170, 255); 
+}
+
+/* .color-1 {
+  background-color: rgb(213, 236, 120);
+}
+.color-2 {
+  background-color: rgb(255, 156, 248);
+}
+.color-3 {
+  background-color: rgb(170, 224, 193);
+}
+
+.wave-text span.hovered {
+  transform: scale(2);
+  color: rgb(87, 124, 193);
+  border-radius: 0.1em;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+} */
+
+

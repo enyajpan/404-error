@@ -13,6 +13,7 @@ const db = firebase.firestore();
 
 
 function makeLinks() {
+
   db.collection("entries")
     .orderBy("timestamp", "desc")
     .onSnapshot((snapshot) => {
@@ -24,13 +25,19 @@ function makeLinks() {
 
         if (!labels.includes("404-error")) return;
 
+        function waveify(text) {
+          return text.split("")
+                     .map(char => `<span>${char}</span>`)
+                     .join("");
+        }
+
         const messageLines = (data.message || "").split("\n");
         const timestamp = data.timestamp?.toDate?.().toLocaleString() || "No timestamp";
 
         const $box = $(`
           <div class="entry-box">
-            <div class="entry-message">
-              ${messageLines.map(line => `<div class="message-line">${line}</div>`).join("")}
+            <div class="entry-message wave-text">
+              ${messageLines.map(line => `<div class="message-line">${waveify(line)}</div>`).join("")}
             </div>
             <div class="entry-meta-side">
               <div class="meta-id">${data.number || ""}</div>
@@ -105,4 +112,21 @@ $(document).ready(function () {
 
   // Send about.png to the back
   $("#about-overlay").css("z-index", 0);
+});
+
+document.querySelectorAll('.wave-text span').forEach(span => {
+  span.addEventListener('mouseenter', () => {
+    span.classList.add('hovered');
+    
+    // Remove any existing color-* class
+    span.classList.remove('color-1', 'color-2', 'color-3');
+    
+    // Randomly pick one
+    const rand = Math.floor(Math.random() * 3) + 1;
+    span.classList.add(`color-${rand}`);
+  });
+
+  span.addEventListener('mouseleave', () => {
+    span.classList.remove('hovered', 'color-1', 'color-2', 'color-3');
+  });
 });
