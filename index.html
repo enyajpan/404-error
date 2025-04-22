@@ -1,92 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In case of loss, please return to:</title>
 
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script
-      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="./StartAudioContext.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
 
-    <link rel="stylesheet" href="./styles.css">
-
-    <title>In case of loss, please return to:</title>
-
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   </head>
 
-  <!-- pop-up instructions -->
-  <div id="popup-overlay">
-    <div id="popup-container">
-      <button id="close-popup">Enter</button>
-      <img src="assets/welcome.png" alt="Intro" id="popup-image">
-    </div>
-  </div>
-  
-  
   <body>
+    <img id="about-overlay" src="assets/about.png" />
+
     <!-- Fixed page title -->
     <div id="fixed-header">
       <a href="https://enyajpan.github.io/in-case-of-loss/" target="_top">
         In case of loss, please return to:
       </a>
     </div>
-    
-    <div id="sort-controls">    
 
-    <!-- Fixed header row -->
-    <div id="fixed-th">
-      <div class="line header-line">
-        <div class="column number">id.</div>
-        <div class="column title scramble">Subject line:</div>
-        <div class="column author scramble">From:</div>           
-        <div class="column message">
-          <span class="header-label scramble">Message</span>
-          <button id="sort-button" class="sort-button">Sort: Oldest First ↑</button>
-        </div>             
-        <div class="column label">Label</div> 
-        <div class="column timestamp scramble">Timestamp</div>
-      </div>
+    <!-- Entries grid -->
+    <div id="scroll-wrapper">
+      <div id="container"></div>
     </div>
-
-      <!-- Scrollable area -->
-      <div id="scroll-wrapper">
-        <div id="container-wrapper">
-          <div id="container">
-            <!-- content like #header, entries, etc -->
-          </div>
-        </div>
+    
 
     <div id="container-wrapper">
       <img 
         id="container-bg" 
-        src="assets/view-all-background.png" 
+        src="assets/404-error-background.png" 
         alt="view all background" 
-        oncontextmenu="return false;"
-      />
-
-      <img 
-        id="about-overlay" 
-        src="assets/about.png" 
-        alt="about background" 
         oncontextmenu="return false;"
       />
     </div>
 
+    <!-- Submission form wrapper -->
     <div id="submission-wrapper">
-      <img 
-        id="submission-bg" 
-        src="assets/submission-form-background.png" 
-        alt="submission form background" 
-        oncontextmenu="return false;" 
-      />
+      <img id="submission-bg" src="assets/submission-form-background.png" alt="submission form background" />
       <div id="submission-overlay">
         <form id="submission-form" novalidate>
-          <!-- Checkboxes -->
           <div class="label-wrapper">
             <div class="label-title">Select label:</div>
             <div class="label-column">
@@ -110,66 +70,25 @@
             <span class="error-message" id="error-label"></span>
           </div>
 
-          <!-- Stack subject + author -->
           <input name="number" type="hidden" />
           <div class="input-stack">
             <input name="subject line" placeholder="Subject" required />
             <span class="error-message" id="error-subject"></span>
             <input name="author" placeholder="Your name" required />
             <span class="error-message" id="error-author"></span>
-          </div>          
+          </div>
 
-          <!-- Message on separate row -->
           <div class="message-wrapper">
-            <textarea name="message" placeholder="Write your message here. What do you want to leave with the world?" required></textarea>
+            <textarea name="message" placeholder="Write your message here." required></textarea>
             <span class="error-message" id="error-message"></span>
           </div>
 
           <button type="post">Post !!</button>
-        </form>                          
+        </form>
       </div>
     </div>
 
-    <div id="spacer"></div>
-      </div>
-      <script>
-        function scrambleText(el, originalText) {
-          const chars = "!<>-_\\/[]{}—=+*^?#________";
-          const duration = 600;
-          const steps = 20;
-          let frame = 0;
-      
-          const scrambleInterval = setInterval(() => {
-            let output = "";
-      
-            for (let i = 0; i < originalText.length; i++) {
-              if (frame > steps) {
-                output += originalText[i];
-              } else if (Math.random() < frame / steps) {
-                output += originalText[i];
-              } else {
-                output += chars[Math.floor(Math.random() * chars.length)];
-              }
-            }
-      
-            el.textContent = output;
-            frame++;
-      
-            if (frame > steps) {
-              clearInterval(scrambleInterval);
-            }
-          }, duration / steps);
-        }
-      
-        document.querySelectorAll('.scramble').forEach(el => {
-          const originalText = el.textContent;
-          el.addEventListener('mouseenter', () => {
-            scrambleText(el, originalText);
-          });
-        });
-      </script>
-    
-    <!-- Thank You Popup -->
+    <!-- Thank you popup -->
     <div id="thank-you-popup" style="display: none;">
       <div class="popup-content">
         <button id="close-thank-you">Close</button>
@@ -177,12 +96,7 @@
       </div>
     </div>
 
-
-    </body>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-  <script src="./script.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>
+
