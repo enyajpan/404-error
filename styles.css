@@ -164,7 +164,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: auto;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -283,7 +283,7 @@ i {
   left: 0;
   width: 100vw;
   height: auto;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -876,4 +876,22 @@ i {
 }
 #close-thank-you:hover {
   font-style: italic;
+}
+
+/* view all background tab */
+#view-all-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0; /* Put it behind everything */
+  width: 100vw;
+  height: auto;
+  display: block;
+  pointer-events: auto;
+}
+
+#view-all-bg {
+  width: 100vw;
+  height: auto;
+  pointer-events: auto; /* allow clicks */
 }

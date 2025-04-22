@@ -18,8 +18,6 @@
   </head>
 
   <body>
-    <img id="about-overlay" src="assets/about.png" />
-
     <!-- Fixed page title -->
     <div id="fixed-header">
       <a href="https://enyajpan.github.io/in-case-of-loss/" target="_top">
@@ -27,19 +25,22 @@
       </a>
     </div>
 
+    <div id="container-wrapper">
+      <!-- BACKGROUND LINK -->
+      <a href="https://enyajpan.github.io/in-case-of-loss/" id="view-all-link">
+        <img id="view-all-bg" src="assets/view-all-background.png" alt="view all" />
+      </a>
+    
+      <!-- FRONT 404 BACKGROUND (non-clickable) -->
+      <img id="container-bg" src="assets/404-error-background.png" alt="404 error" />
+    
+      <!-- ABOUT IMAGE (click toggles z-index only) -->
+      <img id="about-overlay" src="assets/about.png" alt="about" />
+    </div>
+
     <!-- Entries grid -->
     <div id="scroll-wrapper">
       <div id="container"></div>
-    </div>
-    
-
-    <div id="container-wrapper">
-      <img 
-        id="container-bg" 
-        src="assets/404-error-background.png" 
-        alt="view all background" 
-        oncontextmenu="return false;"
-      />
     </div>
 
     <!-- Submission form wrapper -->
