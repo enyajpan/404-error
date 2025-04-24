@@ -36,7 +36,7 @@ function makeLinks() {
 
         const $box = $(`
           <div class="entry-box">
-            <div class="entry-message wave-text">
+            <div class="entry-message flower-text">
               ${messageLines.map(line => `<div class="message-line">${waveify(line)}</div>`).join("")}
             </div>
             <div class="entry-meta-side">
@@ -52,6 +52,38 @@ function makeLinks() {
       });
     });
 }
+
+const colorPalette = [
+  "rgb(216, 255, 58)",
+  "rgb(177, 225, 208)",
+  "rgb(216, 243, 108)",
+  "rgb(255, 168, 254)",
+  "rgb(226, 215, 255)",
+  /* "rgb(181, 209, 255)", */
+  "rgb(255, 210, 245)",
+  /* "rgb(255, 202, 79)", */
+  "rgb(255, 206, 206)"
+];
+
+function getRandomColorFromPalette() {
+  const index = Math.floor(Math.random() * colorPalette.length);
+  return colorPalette[index];
+}
+
+function applyRandomColorHover() {
+  document.querySelectorAll('.flower-text span').forEach(span => {
+    span.addEventListener('mouseenter', () => {
+      span.style.color = getRandomColorFromPalette();
+    });
+
+    span.addEventListener('mouseleave', () => {
+      span.style.color = ''; // reset on exit
+    });
+  });
+}
+
+// Reapply hover effects after dynamic entries render
+setTimeout(applyRandomColorHover, 500);
 
 
 $(document).ready(function () {
@@ -114,7 +146,7 @@ $(document).ready(function () {
   $("#about-overlay").css("z-index", 0);
 });
 
-document.querySelectorAll('.wave-text span').forEach(span => {
+document.querySelectorAll('.flower-text span').forEach(span => {
   span.addEventListener('mouseenter', () => {
     span.classList.add('hovered');
     

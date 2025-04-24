@@ -6,7 +6,7 @@
 }
 @font-face {
   font-family: 'Flowers';
-  src: url('assets/flowers.otf') format('opentype');
+  src: url('assets/pixel-flowers.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,6 @@
 .flower-font {
   font-family: 'Flowers', sans-serif;
   font-size: 2rem;
-  line-height: 1.2;
 }
 
 body, html {
@@ -37,7 +36,7 @@ body, html {
 #th .column {
   font-size: 2rem;
   letter-spacing: -0.1rem;
-  line-height: 1.1;
+  line-height: 1;
   padding: 1px 2px;
   z-index: 100;
   background: none;
@@ -262,7 +261,7 @@ i {
 .entry-message {
   flex: 1;
   font-size: 5rem;
-  line-height: 0.75;
+  line-height: 0 !important;
   letter-spacing: -0.2rem;
   max-width: 100%;
   overflow: visible;
@@ -898,13 +897,14 @@ i {
 }
 
 /* character animation */
-.wave-text {
+.flower-text {
   display: inline-block;
   position: relative;
   line-height: 1;
+  font-variation-settings: "MOVE" 0;
 }
 
-.wave-text span {
+.flower-text span {
   position: relative;
   display: inline-block;
   transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
@@ -912,31 +912,23 @@ i {
   line-height: 1;
 }
 
-.wave-text span:hover {
-  transform: scale(5);
-  color: rgb(87, 124, 193);
-  background-color: rgb(213, 236, 120);
-  opacity: 0.9;
+.flower-text span:hover {
+  animation: pulseMove 2s infinite ease-in-out;
+  font-variation-settings: "MOVE" 1000;
+  transition: font-variation-settings 0.5s ease;
+  transform: scale(8);
   z-index: 10;
-  box-shadow: 0 0 10px rgb(249, 170, 255); 
+  outline-color: rgb(255, 168, 254);
 }
 
-/* .color-1 {
-  background-color: rgb(213, 236, 120);
+@keyframes pulseMove {
+  0% {
+    font-variation-settings: "MOVE" 0;
+  }
+  50% {
+    font-variation-settings: "MOVE" 1000;
+  }
+  100% {
+    font-variation-settings: "MOVE" 0;
+  }
 }
-.color-2 {
-  background-color: rgb(255, 156, 248);
-}
-.color-3 {
-  background-color: rgb(170, 224, 193);
-}
-
-.wave-text span.hovered {
-  transform: scale(2);
-  color: rgb(87, 124, 193);
-  border-radius: 0.1em;
-  z-index: 10;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-} */
-
-
