@@ -266,6 +266,9 @@ i {
   max-width: 100%;
   overflow: visible;
 }
+.message-line {
+  letter-spacing: -1rem; /* tighter spacing across whole line */
+}
 
 /* //////////////////////////////////////////////// */
 
@@ -617,7 +620,7 @@ i {
   bottom: 0;
   width: 100%;
   height: auto;
-  z-index: 1;
+  z-index: 8;
 }
 
 #submission-overlay {
@@ -909,7 +912,8 @@ i {
   display: inline-block;
   transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
   z-index: 1;
-  line-height: 1;
+  line-height: 0.8;
+  padding: 0px;
 }
 
 .flower-text span:hover {
@@ -932,3 +936,64 @@ i {
     font-variation-settings: "MOVE" 0;
   }
 }
+
+.pick-me-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.15rem;
+  border: 0px;
+  border-radius: 0.3px; 
+  padding: 0.4px;
+  pointer-events: auto;
+  z-index: 11;
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pick-me-btn:hover {
+  font-style: italic;
+}
+
+#picked-letters-container {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 100px; /* or however wide you want it */
+  height: 70vh; /* scrollable height */
+  z-index: 10000;
+  pointer-events: none;
+}
+
+#picked-letters {
+  position: absolute;
+  top: 80px;
+  right: 200px;
+  width: 100px;
+  font-family: 'Flowers', sans-serif;
+  font-size: 5rem;
+  line-height: 0.7;
+  z-index: 7;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-height: calc(1em * 7);
+  gap: 0px;
+  text-align: center;
+}
+
+#picked-letters-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: auto;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+}
+
+

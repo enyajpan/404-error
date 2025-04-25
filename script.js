@@ -11,9 +11,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-
 function makeLinks() {
-
   db.collection("entries")
     .orderBy("timestamp", "desc")
     .onSnapshot((snapshot) => {
@@ -27,8 +25,12 @@ function makeLinks() {
 
         function waveify(text) {
           return text.split("")
-                     .map(char => `<span>${char}</span>`)
-                     .join("");
+            .map(char => `
+              <span class="hover-letter">
+                ${char}
+                <button class="pick-me-btn" style="display: none;">Pick me</button>
+              </span>
+            `).join("");
         }
 
         const messageLines = (data.message || "").split("\n");
@@ -50,12 +52,14 @@ function makeLinks() {
 
         $("#container").append($box);
       });
+
+      addHoverEffects(); // apply after all are added
     });
 }
 
 const colorPalette = [
   "rgb(216, 255, 58)",
-  "rgb(177, 225, 208)",
+  "rgb(201, 240, 226)",
   "rgb(216, 243, 108)",
   "rgb(255, 168, 254)",
   "rgb(226, 215, 255)",
@@ -70,33 +74,51 @@ function getRandomColorFromPalette() {
   return colorPalette[index];
 }
 
-function applyRandomColorHover() {
-  document.querySelectorAll('.flower-text span').forEach(span => {
+function addHoverEffects() {
+  document.querySelectorAll('.hover-letter').forEach(span => {
+    const btn = span.querySelector('.pick-me-btn');
+
     span.addEventListener('mouseenter', () => {
-      span.style.color = getRandomColorFromPalette();
+      const color = getRandomColorFromPalette();
+      span.style.color = color;
+      span.setAttribute('data-color', color); // store for later use
+      btn.style.display = "block";
     });
 
     span.addEventListener('mouseleave', () => {
-      span.style.color = ''; // reset on exit
+      span.style.color = '';
+      btn.style.display = "none";
     });
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+    
+      const pickedChar = span.childNodes[0].textContent;
+      const pickedLetter = document.createElement("div");
+      pickedLetter.textContent = pickedChar;
+      pickedLetter.classList.add("picked-letter");
+      pickedLetter.style.fontSize = "10rem";
+      pickedLetter.style.marginBottom = "10px";
+      pickedLetter.style.color = span.getAttribute("data-color") || "inherit";
+    
+      document.getElementById("picked-letters").appendChild(pickedLetter);
+    
+      // Replace content with blank space, remove button
+      span.innerHTML = "&nbsp;";
+      span.classList.remove("hover-letter");
+      span.style.color = "transparent";
+      span.style.pointerEvents = "none";
+    });
+    
   });
 }
-
-// Reapply hover effects after dynamic entries render
-setTimeout(applyRandomColorHover, 500);
-
 
 $(document).ready(function () {
   let isAboutInFront = false;
 
   $("#about-overlay").on("click", function () {
     isAboutInFront = !isAboutInFront;
-
-    if (isAboutInFront) {
-      $(this).css("z-index", 10000);
-    } else {
-      $(this).css("z-index", 0);
-    }
+    $(this).css("z-index", isAboutInFront ? 10000 : 0);
   });
 
   makeLinks();
@@ -142,23 +164,5 @@ $(document).ready(function () {
     }
   });
 
-  // Send about.png to the back
   $("#about-overlay").css("z-index", 0);
-});
-
-document.querySelectorAll('.flower-text span').forEach(span => {
-  span.addEventListener('mouseenter', () => {
-    span.classList.add('hovered');
-    
-    // Remove any existing color-* class
-    span.classList.remove('color-1', 'color-2', 'color-3');
-    
-    // Randomly pick one
-    const rand = Math.floor(Math.random() * 3) + 1;
-    span.classList.add(`color-${rand}`);
-  });
-
-  span.addEventListener('mouseleave', () => {
-    span.classList.remove('hovered', 'color-1', 'color-2', 'color-3');
-  });
 });
