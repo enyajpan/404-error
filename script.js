@@ -102,7 +102,7 @@ function addHoverEffects() {
       if (pickedLettersNew.firstChild) {
         const previousBigLetter = pickedLettersNew.firstChild;
         previousBigLetter.classList.remove("picked-letter-new");
-        previousBigLetter.style.fontSize = "5rem";
+        previousBigLetter.style.fontSize = "8rem";
 
         // Insert the previous big letter at the top of the grid
         if (pickedLettersGrid.firstChild) {

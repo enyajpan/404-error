@@ -922,6 +922,7 @@ i {
   transition: font-variation-settings 0.5s ease;
   transform: scale(8);
   z-index: 10;
+  text-shadow: 0 0 10px rgb(0, 115, 255,0.9), 0 0 30px rgba(214, 233, 255, 0.7); /* ✨ BLUE GLOW */ 
 }
 
 @keyframes pulseMove {
@@ -962,70 +963,67 @@ i {
 
 #picked-letters-container {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 100px; /* or however wide you want it */
-  height: 100vh; /* scrollable height */
-  z-index: 7;
+  top: 0;
+  right: 0;
+  width: 22vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   pointer-events: none;
+  z-index: 8;
+}
+
+#picked-letters-new {
+  width: 100%;
+  height: 250px; /* or however tall you want the big letter section */
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  padding-top: 65px;
+  padding-right: 10px;
 }
 
 #picked-letters {
-  position: absolute;
-  top: 80px;
-  right: 15px;
-  width: 22vw;
-  font-family: 'Flowers', sans-serif;
-  font-size: 5rem;
-  line-height: 0.7;
-  z-index: 8;
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: center;
-  max-height: 100vh; /* scrollable space */
-  overflow-y: auto; /* <--- IMPORTANT: make it scrollable */
+  flex: 1;
+  overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  pointer-events: auto;
 }
 
-.picked-letter {
-  font-family: 'Flowers', sans-serif;
-  font-size: 5rem;
-  line-height: 1;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.8s ease;
+#picked-letters::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
-/* Freshly picked letter */
-.picked-letter-new {
-  font-size: 20rem;
-}
-
-/* New picked letter big area */
-#picked-letters-new {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 250px;
-}
-
-/* Grid of regular picked letters */
 #picked-letters-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0px;
   width: 100%;
   text-align: center;
+  font-family: 'Flowers', sans-serif;
+  font-size: 5rem;
+  padding: 10px;
 }
 
-#picked-letters::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+/* Picked letters styles */
+.picked-letter {
+  font-family: 'Flowers', sans-serif;
+  font-size: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s ease;
+  color: inherit;
 }
+
+.picked-letter-new {
+  font-size: 18rem;
+}
+
 
 #picked-letters-bg {
   position: fixed;
@@ -1036,6 +1034,24 @@ i {
   z-index: 4;
   pointer-events: none;
   user-select: none;
+}
+
+/* picked letters scrollable area */ 
+
+#picked-letters-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: auto;
+}
+
+/* Hide scrollbar (optional) */
+#picked-letters-scroll::-webkit-scrollbar {
+  display: none;
+}
+#picked-letters-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 
