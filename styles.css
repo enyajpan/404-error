@@ -922,7 +922,6 @@ i {
   transition: font-variation-settings 0.5s ease;
   transform: scale(8);
   z-index: 10;
-  outline-color: rgb(255, 168, 254);
 }
 
 @keyframes pulseMove {
@@ -941,6 +940,7 @@ i {
   position: absolute;
   top: 50%;
   left: 50%;
+  max-height: 70vh;
   transform: translate(-50%, -50%);
   font-size: 0.15rem;
   border: 0px;
@@ -952,6 +952,8 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .pick-me-btn:hover {
@@ -963,26 +965,66 @@ i {
   top: 0px;
   right: 0px;
   width: 100px; /* or however wide you want it */
-  height: 70vh; /* scrollable height */
-  z-index: 10000;
+  height: 100vh; /* scrollable height */
+  z-index: 7;
   pointer-events: none;
 }
 
 #picked-letters {
   position: absolute;
   top: 80px;
-  right: 200px;
-  width: 100px;
+  right: 15px;
+  width: 22vw;
   font-family: 'Flowers', sans-serif;
   font-size: 5rem;
   line-height: 0.7;
-  z-index: 7;
-  pointer-events: none;
+  z-index: 8;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  max-height: 100vh; /* scrollable space */
+  overflow-y: auto; /* <--- IMPORTANT: make it scrollable */
+  overflow-x: hidden;
+}
+
+.picked-letter {
+  font-family: 'Flowers', sans-serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s ease;
+}
+
+/* Freshly picked letter */
+.picked-letter-new {
+  font-size: 20rem;
+}
+
+/* New picked letter big area */
+#picked-letters-new {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+
+/* Grid of regular picked letters */
+#picked-letters-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  max-height: calc(1em * 7);
   gap: 0px;
+  width: 100%;
   text-align: center;
+}
+
+#picked-letters::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 #picked-letters-bg {
@@ -995,5 +1037,6 @@ i {
   pointer-events: none;
   user-select: none;
 }
+
 
 

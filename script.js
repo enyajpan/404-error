@@ -94,21 +94,41 @@ function addHoverEffects() {
       e.stopPropagation();
     
       const pickedChar = span.childNodes[0].textContent;
+    
+      const pickedLettersNew = document.getElementById("picked-letters-new");
+      const pickedLettersGrid = document.getElementById("picked-letters-grid");
+    
+      // If there's already a big letter showing, move it down into the grid
+      if (pickedLettersNew.firstChild) {
+        const previousBigLetter = pickedLettersNew.firstChild;
+        previousBigLetter.classList.remove("picked-letter-new");
+        previousBigLetter.style.fontSize = "5rem";
+
+        // Insert the previous big letter at the top of the grid
+        if (pickedLettersGrid.firstChild) {
+          pickedLettersGrid.insertBefore(previousBigLetter, pickedLettersGrid.firstChild);
+        } else {
+          pickedLettersGrid.appendChild(previousBigLetter);
+        }
+      }
+    
+      // Now add the new big letter
       const pickedLetter = document.createElement("div");
       pickedLetter.textContent = pickedChar;
-      pickedLetter.classList.add("picked-letter");
-      pickedLetter.style.fontSize = "10rem";
-      pickedLetter.style.marginBottom = "10px";
+      pickedLetter.classList.add("picked-letter", "picked-letter-new");
       pickedLetter.style.color = span.getAttribute("data-color") || "inherit";
     
-      document.getElementById("picked-letters").appendChild(pickedLetter);
+      pickedLettersNew.innerHTML = "";
+      pickedLettersNew.appendChild(pickedLetter);
     
-      // Replace content with blank space, remove button
+      // Clear the picked letter from the message
       span.innerHTML = "&nbsp;";
       span.classList.remove("hover-letter");
       span.style.color = "transparent";
       span.style.pointerEvents = "none";
     });
+    
+    
     
   });
 }
@@ -166,3 +186,8 @@ $(document).ready(function () {
 
   $("#about-overlay").css("z-index", 0);
 });
+
+// Prevent picked-letters scroll from bubbling to the main page
+document.getElementById('picked-letters').addEventListener('wheel', function(event) {
+  event.stopPropagation();
+}, { passive: false });
