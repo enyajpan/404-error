@@ -83,6 +83,7 @@ function addHoverEffects() {
       span.style.color = color;
       span.setAttribute('data-color', color); // store for later use
       btn.style.display = "block";
+      
     });
 
     span.addEventListener('mouseleave', () => {

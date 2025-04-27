@@ -925,6 +925,7 @@ i {
   text-shadow: 0 0 10px rgb(0, 115, 255,0.9), 0 0 30px rgba(214, 233, 255, 0.7); /* ✨ BLUE GLOW */ 
 }
 
+
 @keyframes pulseMove {
   0% {
     font-variation-settings: "MOVE" 0;
@@ -1022,6 +1023,10 @@ i {
 
 .picked-letter-new {
   font-size: 18rem;
+  animation: pulseMove 3s infinite ease-in-out; 
+  font-variation-settings: "MOVE" 1000; 
+  text-shadow: 0 0 20px rgba(45, 139, 255, 0.9), 0 0 30px rgba(120, 180, 255, 0.6); 
+  transition: font-variation-settings 1s ease, text-shadow 0.5s ease;
 }
 
 
