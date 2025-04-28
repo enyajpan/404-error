@@ -189,6 +189,79 @@ $(document).ready(function () {
 });
 
 // Prevent picked-letters scroll from bubbling to the main page
-document.getElementById('picked-letters').addEventListener('wheel', function(event) {
+document.getElementById('picked-letters-scroll').addEventListener('wheel', function(event) {
   event.stopPropagation();
 }, { passive: false });
+
+document.getElementById('print-button').addEventListener('click', function () {
+  const printButton = this;
+
+  // Change button text and disable
+  printButton.textContent = "Preparing your print...";
+  printButton.disabled = true;
+  printButton.style.opacity = "0.6"; // optional: make it visually faded when disabled
+
+  setTimeout(() => {
+    const printContent = `
+      <html>
+        <head>
+          <title>Print Picked Letters</title>
+          <style>
+            @font-face {
+              font-family: 'Flowers';
+              src: url('assets/pixel-flowers.ttf') format('truetype');
+              font-weight: normal;
+              font-style: normal;
+            }
+            body {
+              font-family: 'Flowers', sans-serif;
+              font-size: 5rem;
+              text-align: center;
+              margin: 0;
+              padding: 1in;
+              background: white;
+              color: black;
+            }
+            #print-container {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 20px;
+            }
+            .picked-letter-new {
+              font-size: 12rem;
+              grid-column: span 4;
+            }
+            .picked-letter {
+              font-size: 6rem;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="print-container">
+            ${document.getElementById('picked-letters-new').innerHTML}
+            ${document.getElementById('picked-letters-grid').innerHTML}
+          </div>
+        </body>
+      </html>
+    `;
+
+    const printWindow = window.open('', '', 'width=800,height=600');
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    printWindow.focus();
+
+    // Delay slightly to let font load before printing
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 500); // wait 500ms to load font
+
+    // Restore button text and enable
+    printButton.textContent = "Take Away";
+    printButton.disabled = false;
+    printButton.style.opacity = "1"; // reset opacity
+  }, 600); // 600 milliseconds delay
+});
+
+
