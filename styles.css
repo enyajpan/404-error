@@ -1075,7 +1075,7 @@ i {
   padding: 1px 2px;
   vertical-align: middle;
   border-radius: 3px;
-  border: 1px solid rgba(23, 23, 23, 0.6);
+  border: 1px solid rgba(10, 10, 10, 0.6);
   cursor: pointer;
   pointer-events: auto;
   width: auto;
@@ -1084,6 +1084,23 @@ i {
 .sort-button:hover {
   font-style: italic;
   background-color: rgb(212, 212, 212);
+}
+
+/* x button to close picked letters container */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  border: 1px solid rgba(10, 10, 10, 0.6);
+  border-radius: 3px;
+  padding: 1px 4px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.close-button:hover {
+  font-style: italic;
+  background: rgb(232, 232, 232);
 }
 
 

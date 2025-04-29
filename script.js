@@ -192,6 +192,28 @@ document.getElementById('picked-letters-scroll').addEventListener('wheel', funct
   event.stopPropagation();
 }, { passive: false });
 
+
+/* close/open toggle */
+const toggleButton = document.getElementById('close-picked-letters');
+const pickedLettersElements = [
+  document.getElementById('picked-letters-bg'),
+  document.getElementById('picked-letters-grid'),
+  document.getElementById('picked-letters-new'),
+  document.getElementById('button-row')
+];
+
+toggleButton.addEventListener('click', () => {
+  const isVisible = pickedLettersElements[0].style.display !== 'none';
+
+  pickedLettersElements.forEach(el => {
+    el.style.display = isVisible ? 'none' : '';
+  });
+
+  toggleButton.textContent = isVisible ? 'Show' : '×';
+});
+
+
+/* clear grid button */
 document.getElementById('clear-button').addEventListener('click', () => {
   const newContainer = document.getElementById('picked-letters-new');
   const gridContainer = document.getElementById('picked-letters-grid');
@@ -201,6 +223,7 @@ document.getElementById('clear-button').addEventListener('click', () => {
   gridContainer.innerHTML = '';
 });
 
+/* print settings */
 document.getElementById('print-button').addEventListener('click', function () {
   const printButton = this;
 
