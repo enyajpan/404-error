@@ -1060,27 +1060,35 @@ i {
 }
 
 
-#print-button.sort-button {
+/* for both clear and print buttons */
+#button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-right: 40px;
-  align-self: flex-end;
+  padding: 0 20px;
+}
+.sort-button {
   font-size: 1rem;
   padding: 1px 2px;
   vertical-align: middle;
-  border-radius: 2px;
-  border: 2px rgb(0,0,0);
+  border-radius: 3px;
+  border: 1px solid rgba(23, 23, 23, 0.6);
   cursor: pointer;
   pointer-events: auto;
-  width: auto; 
+  width: auto;
   z-index: 2000;
 }
-#print-button.sort-button:hover {
+.sort-button:hover {
   font-style: italic;
+  background-color: rgb(212, 212, 212);
 }
 
-/* window printing */
 
+
+/* print window */
 @media print {
   body * {
     visibility: hidden;
@@ -1095,3 +1103,5 @@ i {
     width: 100%;
   }
 }
+
+
