@@ -34,7 +34,6 @@ body, html {
 }
 
 #th .column {
-  font-size: 2rem;
   letter-spacing: -0.1rem;
   line-height: 1;
   padding: 1px 2px;
@@ -84,6 +83,42 @@ html, body {
   pointer-events: auto; /* only the link is clickable */
 }
 
+/* header formatting at top  */
+#fixed-th {
+  font-family: 'Gaisyr Book Italic', serif;
+  color: rgb(242, 226, 235);
+  position: fixed;
+  top: 75px;
+  width: 97vw;
+  z-index: 9999;
+  overflow: visible;
+  pointer-events: none; /* so it doesn't block clicks */
+}
+.header-line {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 1.1;
+  padding: 0px;
+  pointer-events: auto;
+}
+.two-column-header .column {
+  flex: 1;
+  text-align: left;
+  padding: 0 0px;
+}
+.message-column {
+  flex: 2;
+  font-size: 3rem !important;
+  letter-spacing: -0.1rem;
+}
+.info-column {
+  flex: 1;
+  font-size: 3rem !important;
+  letter-spacing: -0.1rem;
+}
+
+
 /* sort button formatting */
 #sort-button.sort-button {
   margin-left: 20px;
@@ -94,14 +129,6 @@ html, body {
 }
 .sort-button:hover {
   font-style: italic;
-}
-
-/* ascii animation */
-.ascii-animate {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: auto;
 }
 
 .flower-letter {
