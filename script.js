@@ -38,8 +38,11 @@ function makeLinks() {
 
         const $box = $(`
           <div class="entry-box">
-            <div class="entry-message flower-text">
-              ${messageLines.map(line => `<div class="message-line">${waveify(line)}</div>`).join("")}
+            <div class="entry-message">
+              <div class="entry-subject">${data["subject line"] || ""}</div>
+              <div class="flower-text">
+                ${messageLines.map(line => `<div class="message-line">${waveify(line)}</div>`).join("")}
+              </div>
             </div>
             <div class="entry-meta-side">
               <div class="meta-id">${data.number || ""}</div>
@@ -49,6 +52,7 @@ function makeLinks() {
             </div>
           </div>
         `);
+        
 
         $("#container").append($box);
       });

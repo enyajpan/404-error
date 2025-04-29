@@ -10,6 +10,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Connect Nail';
+  src: url('assets/ABCConnect-Nail.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .flower-font {
   font-family: 'Flowers', sans-serif;
@@ -119,6 +125,16 @@ html, body {
   letter-spacing: -0.1rem;
   position: absolute;
   right: 150px;
+}
+
+/* message subject line - keep formatting in Arial */
+.entry-subject {
+  font-family: Arial, sans-serif;
+  font-size: 8rem;
+  color: rgb(143, 236, 120);
+  line-height: 0.7;
+  letter-spacing: -0.6rem;
+  margin-bottom: 5px;
 }
 
 
@@ -258,7 +274,7 @@ i {
   color: rgb(143, 236, 120);
   line-height: 1.4;
   padding: 5px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   width: 100%;
   max-width: 100%;
 }
@@ -297,7 +313,8 @@ i {
   overflow: visible;
 }
 .message-line {
-  letter-spacing: -1rem; /* tighter spacing across whole line */
+  letter-spacing: -1.3rem; /* tighter spacing across whole line */
+  line-height: 0.5;
 }
 
 /* //////////////////////////////////////////////// */
