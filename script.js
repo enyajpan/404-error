@@ -196,10 +196,9 @@ document.getElementById('picked-letters-scroll').addEventListener('wheel', funct
 document.getElementById('print-button').addEventListener('click', function () {
   const printButton = this;
 
-  // Change button text and disable
   printButton.textContent = "Preparing your print...";
   printButton.disabled = true;
-  printButton.style.opacity = "0.6"; // optional: make it visually faded when disabled
+  printButton.style.opacity = "0.6";
 
   setTimeout(() => {
     const printContent = `
@@ -209,34 +208,55 @@ document.getElementById('print-button').addEventListener('click', function () {
           <style>
             @font-face {
               font-family: 'Flowers';
-              src: url('assets/pixel-flowers.ttf') format('truetype');
-              font-weight: normal;
-              font-style: normal;
+              src: url('https://enyajpan.github.io/in-case-of-loss/assets/pixel-flowers.ttf') format('truetype');
             }
+
+            @page {
+              size: landscape;
+            }
+
             body {
               font-family: 'Flowers', sans-serif;
               font-size: 5rem;
               text-align: center;
               margin: 0;
-              padding: 1in;
-              background: white;
-              color: black;
+              padding: 0;
+              background: url('https://enyajpan.github.io/404-error/assets/404-error-print-bg.png') no-repeat center center;              
+              background-size: cover;
+              width: 11in;
+              height: 8.5in;
             }
+
             #print-container {
               display: grid;
               grid-template-columns: repeat(4, 1fr);
               gap: 20px;
+              margin: 1in;
             }
+
             .picked-letter-new {
               font-size: 12rem;
               grid-column: span 4;
             }
+
             .picked-letter {
               font-size: 6rem;
             }
           </style>
         </head>
         <body>
+          <img class="print-background" src="https://enyajpan.github.io/404-error/assets/404-error-print-bg.png" alt="background"
+            style="
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 11in;
+              height: 8.5in;
+              object-fit: cover;
+              z-index: -1;
+              pointer-events: none;
+            " />
+
           <div id="print-container">
             ${document.getElementById('picked-letters-new').innerHTML}
             ${document.getElementById('picked-letters-grid').innerHTML}
@@ -250,18 +270,15 @@ document.getElementById('print-button').addEventListener('click', function () {
     printWindow.document.write(printContent);
     printWindow.document.close();
     printWindow.focus();
+    printWindow.print();
+    printWindow.close();
 
-    // Delay slightly to let font load before printing
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 500); // wait 500ms to load font
-
-    // Restore button text and enable
     printButton.textContent = "Take Away";
     printButton.disabled = false;
-    printButton.style.opacity = "1"; // reset opacity
-  }, 600); // 600 milliseconds delay
+    printButton.style.opacity = "1";
+  }, 600);
 });
+
+
 
 
