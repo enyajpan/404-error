@@ -26,9 +26,9 @@ body, html {
   padding: 0;
   font-family: sans-serif;
   font-size: 12px;
-  color: rgb(143, 236, 120);
+  color: rgb(176, 183, 195);
   line-height: 1;
-  background-color: rgb(242, 226, 235);
+  background-color: rgb(33, 37, 43);
 }
 
 * {
@@ -79,7 +79,7 @@ html, body {
   width: 100vw;
   font-size: 5.5rem;
   letter-spacing: -0.3rem;
-  color: rgb(154, 178, 223);
+  color: rgb(100, 149, 238);
   z-index: 1;
   pointer-events: none; /* makes it non-blocking unless you want it to be clickable */
 }
@@ -92,9 +92,9 @@ html, body {
 /* header formatting at top  */
 #fixed-th {
   font-family: 'Gaisyr Book Italic', serif;
-  color: rgb(242, 226, 235);
+  color: rgb(167, 140, 250);
   position: fixed;
-  top: 75px;
+  top: 85px;
   width: 97vw;
   z-index: 3;
   overflow: visible;
@@ -131,7 +131,7 @@ html, body {
 .entry-subject {
   font-family: Arial, sans-serif;
   font-size: 8rem;
-  color: rgb(143, 236, 120);
+  color: rgb(176, 183, 195); 
   line-height: 0.7;
   letter-spacing: -0.6rem;
   margin-bottom: 5px;
@@ -150,18 +150,6 @@ html, body {
   font-style: italic;
 }
 
-.flower-letter {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-family: monospace;
-  font-size: 1rem;
-  color: rgb(143, 236, 120);
-  transition: color 0.3s ease;
-}
-.flower-letter:hover {
-  color: rgb(255, 0, 157);
-}
-
 .about {
   font-style: italic;
   font-size: 1rem;
@@ -175,21 +163,9 @@ html, body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border-bottom: 1px solid rgb(154, 178, 223);
   padding: 5px 5px;
   font-size: 1rem;
   line-height: 1.1;
-}
-
-.timestamp {
-  font-size: 1rem;
-  color: rgb(213, 236, 120);
-}
-
-.timestamp-alt {
-  font-size: 1rem;
-  letter-spacing: -0.1rem;
-  color: rgb(213, 236, 120);
 }
 
 /* Wraps the background image behind container */
@@ -271,7 +247,7 @@ i {
   gap: 10px;
   font-family: 'Flowers', sans-serif !important;
   font-size: 10rem;
-  color: rgb(143, 236, 120);
+  color: rgb(103, 110, 149);
   line-height: 1.4;
   padding: 5px;
   margin-bottom: 10px;
@@ -630,7 +606,6 @@ i {
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: rgb(213, 236, 120);
 
   text-align: right;
   align-items: right;
@@ -645,7 +620,6 @@ i {
 .entry-line:hover .timestamp {
   -webkit-line-clamp: unset;
   max-height: none; /* expands to full height */
-  color: rgb(213, 236, 120);
 }
 
 /* submission form css */
@@ -699,25 +673,26 @@ i {
 
 #submission-form input[name="subject line"],
 #submission-form input[name="author"] {
-  color: rgb(229, 140, 192); 
+  color: rgb(207, 104, 255); 
+  background-color: rgb(210, 214, 221);
   padding: 5px;
-  border: 1px solid rgb(87, 124, 193);
+  border: 1px solid rgb(207, 104, 255);
   border-radius: 4px;
   font-size: 1rem;
 }
 
 #submission-form input[name="subject line"]::placeholder,
 #submission-form input[name="author"]::placeholder {
-  color:rgb(154, 178, 223);
+  color:rgb(167, 140, 250);
   font-size: 1rem;
 }
 #submission-form textarea[name="message"]::placeholder {
-  color: rgb(154, 178, 223);
+  color: rgb(167, 140, 250);
 }
 #submission-form input:focus,
 #submission-form textarea:focus {
   outline: none;
-  border: 1px solid rgb(229, 140, 192); 
+  border: 1px solid rgb(207, 104, 255); 
   box-shadow: 0 0 0 2px rgba(255, 70, 178, 0.2); /* optional soft glow */
 }
 
@@ -728,8 +703,9 @@ i {
   width: 600px;
   height: 7rem;
   padding: 6px;
-  color: rgb(229, 140, 192);
-  border: 1px solid rgb(87, 124, 193);
+  color: rgb(207, 104, 255);
+  background-color: rgb(210, 214, 221);
+  border: 1px solid rgb(207, 104, 255);
   border-radius: 4px;
   resize: none;
 }
@@ -762,7 +738,7 @@ i {
 
 /* submission form error message formatting */
 .error-message {
-  color: rgb(229, 140, 192);
+  color: rgb(224, 108, 117);
   font-size: 0.8rem;
   margin-top: 2px;
   padding-left: 0px;
@@ -787,7 +763,7 @@ i {
   font-family: 'Gaisyr Book Italic', serif;
   font-size: 1.1rem;
   letter-spacing: -0.02em;
-  color: rgb(87, 124, 193);
+  color: rgb(176, 183, 195);
   margin-top: -12px;
 }
 
@@ -829,7 +805,7 @@ i {
   user-select: none;
   display: inline-flex;
   align-items: center;
-  color: rgb(87, 124, 193);
+  color: rgb(210, 214, 221);
 }
 
 /* Custom square box */
@@ -839,8 +815,8 @@ i {
   left: 0;
   height: 14px;
   width: 14px;
-  background-color: white;
-  border: 1px solid rgb(87, 124, 193);
+  background-color: rgb(210, 214, 221);
+  border: 1px solid rgb(207, 104, 255);
   border-radius: 2px;
   box-sizing: border-box;
 }
@@ -853,13 +829,13 @@ i {
   top: -2px;
   width: 5px;
   height: 10px;
-  border: solid rgb(229, 140, 192);
+  border: solid rgb(207, 104, 255);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 
 .custom-checkbox:hover .checkmark {
-  background-color: rgb(242, 226, 235);
+  background-color: rgb(230, 222, 255);
 }
 
 #submission-form button {
@@ -875,26 +851,6 @@ i {
 
 #submission-form button:hover {
   font-style: italic;
-}
-
-/* label tag */
-.tag-button {
-  display: inline-block;
-  padding: 0.5px 2px;
-  color: rgb(229, 140, 192);
-  background-color: rgb(242, 245, 249);
-  border: 1px solid rgb(229, 140, 192);
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.2s ease;
-  margin: 0px;
-}
-
-.tag-button:hover {
-  background-color: rgb(229, 140, 192);
-  color: rgb(242, 226, 235); 
 }
 
 /* thank you message formatting */
