@@ -972,6 +972,7 @@ i {
   display: inline-block;     /* prevent stretching */
   text-align: center;
   vertical-align: middle;
+  z-index: 10002 !important;
 }
 
 /* thank you message formatting */

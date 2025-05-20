@@ -208,28 +208,58 @@ function addHoverEffects() {
 
 
 $(document).ready(function () {
+  // Set default z-index to -1 (back)
+  const $about = $("#about-overlay");
+  const $todo = $("#todo-overlay");
+  $about.css("z-index", 0);
+  $todo.css("z-index", 0);
+
   let isAboutInFront = false;
-
-  $("#about-overlay").on("click", function () {
-    if (isAboutInFront) {
-      $(this).css("z-index", 0); // move behind
-    } else {
-      $(this).css("z-index", 10001); // move to front
-    }
-    isAboutInFront = !isAboutInFront;
-  });
-
   let isTodoInFront = false;
+  let pickedLettersVisible = true;
 
-  $("#todo-overlay").on("click", function () {
-    if (isTodoInFront) {
-      $(this).css("z-index", 0); // move behind
-    } else {
-      $(this).css("z-index", 10000); // move to front
-    }
-    isTodoInFront = !isTodoInFront;
+  // toggle about 
+  $about.on("click", function () {
+    isAboutInFront = !isAboutInFront;
+    $about.css("z-index", isAboutInFront ? 10001 : 0);
   });
 
+  // toggle todo
+  $todo.on("click", function () {
+    isTodoInFront = !isTodoInFront;
+    $todo.css("z-index", isTodoInFront ? 10000 : 0);
+  });
+
+  // Toggle Picked Letters Container
+  const toggleButton = document.getElementById('close-picked-letters');
+  const pickedLettersContainer = document.getElementById('picked-letters-container');
+  const pickedLettersElements = [
+    document.getElementById('picked-letters-bg'),
+    document.getElementById('picked-letters-grid'),
+    document.getElementById('picked-letters-new'),
+    document.getElementById('button-row')
+  ];
+
+  toggleButton.addEventListener('click', () => {
+    pickedLettersVisible = !pickedLettersVisible;
+
+    pickedLettersElements.forEach(el => {
+      el.style.display = pickedLettersVisible ? '' : 'none';
+    });
+
+    // Toggle picked letters container z-index
+    pickedLettersContainer.style.zIndex = pickedLettersVisible ? 8 : -1;
+
+    // On "Hide", reset about/todo overlays to back
+    if (!pickedLettersVisible) {
+      $about.css("z-index", 0);
+      $todo.css("z-index", 0);
+      isAboutInFront = false;
+      isTodoInFront = false;
+    }
+
+    toggleButton.textContent = pickedLettersVisible ? 'Hide' : 'Show';
+  });
 
   makeLinks();
 
@@ -281,27 +311,6 @@ $(document).ready(function () {
 document.getElementById('picked-letters-scroll').addEventListener('wheel', function(event) {
   event.stopPropagation();
 }, { passive: false });
-
-
-/* close/open toggle */
-const toggleButton = document.getElementById('close-picked-letters');
-const pickedLettersElements = [
-  document.getElementById('picked-letters-bg'),
-  document.getElementById('picked-letters-grid'),
-  document.getElementById('picked-letters-new'),
-  document.getElementById('button-row')
-];
-
-toggleButton.addEventListener('click', () => {
-  const isVisible = pickedLettersElements[0].style.display !== 'none';
-
-  pickedLettersElements.forEach(el => {
-    el.style.display = isVisible ? 'none' : '';
-  });
-
-  toggleButton.textContent = isVisible ? 'Show' : 'Hide';
-});
-
 
 /* clear grid button */
 document.getElementById('clear-button').addEventListener('click', () => {
