@@ -931,7 +931,7 @@ i {
   background: none; */
   cursor: pointer;
   font-size: 1rem;
-  padding: 0 2px;
+  padding: 0 4px;
   /* font: inherit; */
 }
 #submission-form button:hover {
@@ -1197,7 +1197,7 @@ i {
 }
 .sort-button {
   font-size: 1rem;
-  padding: 1px 5px;
+  padding: 1px 4px;
   vertical-align: middle;
   border-radius: 3px;
   border: 1px solid rgba(10, 10, 10, 0.6);
@@ -1219,7 +1219,7 @@ i {
   font-size: 1rem;
   border: 1px solid rgba(10, 10, 10, 0.6);
   border-radius: 3px;
-  padding: 1px 5px;
+  padding: 1px 4px;
   cursor: pointer;
   z-index: 9999;
 }
