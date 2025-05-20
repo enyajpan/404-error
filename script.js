@@ -11,6 +11,54 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+function getColorFromKeyword(label) {
+  const colors = {
+    green: "rgb(63,193,64)",
+    blue: "rgb(66, 132, 237)",
+    purple: "rgb(199, 56, 198)",
+    pink: "rgb(205, 96, 105)",
+    hotpink: "rgb(250, 39, 142)",
+    lavender: "rgb(198, 123, 218)",
+    orange: "rgb(255, 109, 17)",
+    magenta: "rgb(241, 137, 220)",
+    gold: "rgb(240, 170, 9)",
+    violet: "rgb(124, 77, 255)",
+    teal: "rgb(0, 190, 196)",
+    gray: "rgb(169, 169, 170)",
+  };
+  return colors[label] || "inherit";
+}
+
+/* keywords */
+function highlightKeywords(text) {
+  return text
+    .replace(/(I['’` ]?m sorry)/gi, '<keyword data-color="rgb(66,132,237)">$1</keyword>')
+    .replace(/(sorry)/gi, '<keyword data-color="rgb(66,132,237)">$1</keyword>')
+    .replace(/(I miss you)/gi, '<keyword data-color="rgb(66,132,237)">$1</keyword>')
+    .replace(/(I have missed you)/gi, '<keyword data-color="rgb(199,56,198)">$1</keyword>')
+    .replace(/(I love you)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(I loved you)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(in love)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(I've always loved)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(my true love)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(I fell in love with you)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/(love)/gi, '<keyword data-color="rgb(250,39,142)">$1</keyword>')
+    .replace(/(I've loved)/gi, '<keyword data-color="rgb(205,96,105)">$1</keyword>')
+    .replace(/\b(home)\b/gi, '<keyword data-color="rgb(198,123,218)">$1</keyword>')
+    .replace(/(friends)/gi, '<keyword data-color="rgb(255,109,17)">$1</keyword>')
+    .replace(/(I'm leaving you)/gi, '<keyword data-color="rgb(241,137,220)">$1</keyword>')
+    .replace(/(letting him go)/gi, '<keyword data-color="rgb(66,132,237)">$1</keyword>')
+    .replace(/(letting her go)/gi, '<keyword data-color="rgb(66,132,237)">$1</keyword>')
+    .replace(/(my heart)/gi, '<keyword data-color="rgb(199,56,198)">$1</keyword>')
+    .replace(/(forever)/gi, '<keyword data-color="rgb(240,170,9)">$1</keyword>')
+    .replace(/\b(me)\b/gi, '<keyword data-color="rgb(199,56,198)">$1</keyword>')
+    .replace(/\b(you)\b/gi, '<keyword data-color="rgb(124,77,255)">$1</keyword>')
+    .replace(/\b(us)\b/gi, '<keyword data-color="rgb(250,39,142)">$1</keyword>')
+    .replace(/\b(we)\b/gi, '<keyword data-color="rgb(0,190,196)">$1</keyword>');
+}
+
+
+
 function makeLinks() {
   db.collection("entries")
     .orderBy("timestamp", "desc")
@@ -23,15 +71,40 @@ function makeLinks() {
 
         if (!labels.includes("404-error")) return;
 
-        function waveify(text) {
-          return text.split("")
-            .map(char => `
-              <span class="hover-letter">
-                ${char}
-                <button class="pick-me-btn" style="display: none;">Pick me</button>
-              </span>
-            `).join("");
+        function waveifyWithKeywords(rawText) {
+          const highlighted = highlightKeywords(rawText);
+          const container = document.createElement("div");
+          container.innerHTML = highlighted;
+        
+          function wrapNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+              return node.textContent.split("").map(char => {
+                const span = document.createElement("span");
+                span.className = "hover-letter";
+                span.innerHTML = `${char}<button class="pick-me-btn" style="display: none;">Pick me</button>`;
+                return span;
+              });
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              const color = node.getAttribute("data-color");
+              return Array.from(node.childNodes).flatMap(child => {
+                return wrapNode(child).map(wrapped => {
+                  if (color) wrapped.style.color = color;
+                  return wrapped;
+                });
+              });
+            } else {
+              return [];
+            }
+          }                 
+        
+          const result = Array.from(container.childNodes)
+            .flatMap(wrapNode)
+            .map(el => el.outerHTML)
+            .join("");
+        
+          return result;
         }
+        
 
         const messageLines = (data.message || "").split("\n");
         const timestamp = data.timestamp?.toDate?.().toLocaleString() || "No timestamp";
@@ -41,7 +114,7 @@ function makeLinks() {
             <div class="entry-message">
               <div class="entry-subject">${data["subject line"] || ""}</div>
               <div class="flower-text">
-                ${messageLines.map(line => `<div class="message-line">${waveify(line)}</div>`).join("")}
+                ${messageLines.map(line => `<div class="message-line">${waveifyWithKeywords(line)}</div>`).join("")}
               </div>
             </div>
             <div class="entry-meta-side">
@@ -62,13 +135,16 @@ function makeLinks() {
 }
 
 const colorPalette = [
-  "rgb(255, 145, 112)",
-  "rgb(100, 149, 238)",
-  "rgb(167, 140, 250)",
-  "rgb(152, 195, 121)",
-  "rgb(207, 104, 225)",
-  "rgb(87, 183, 195)",
-  "rgb(224, 108, 117)"
+  "rgb(240, 170, 9)",
+  "rgb(241, 137, 220)",
+  "rgb(198, 123, 218)",
+  "rgb(250, 39, 142)",
+  "rgb(63, 193, 64)",
+  "rgb(255, 109, 17)",
+  "rgb(66, 132, 237)",
+  "rgb(199, 56, 198)",
+  "rgb(0, 190, 196)",
+  "rgb(124, 77, 255)",
 ];
 
 function getRandomColorFromPalette() {
@@ -85,11 +161,10 @@ function addHoverEffects() {
       span.style.color = color;
       span.setAttribute('data-color', color); // store for later use
       btn.style.display = "block";
-      
     });
 
     span.addEventListener('mouseleave', () => {
-      span.style.color = '';
+      // Do not reset the color; just hide the button.
       btn.style.display = "none";
     });
 
@@ -101,12 +176,12 @@ function addHoverEffects() {
       const pickedLettersNew = document.getElementById("picked-letters-new");
       const pickedLettersGrid = document.getElementById("picked-letters-grid");
     
-      // If there's already a big letter showing, move it down into the grid
+      // If there's already a big letter showing, move it down into the grid.
       if (pickedLettersNew.firstChild) {
         const previousBigLetter = pickedLettersNew.firstChild;
         previousBigLetter.classList.remove("picked-letter-new");
 
-        // Insert the previous big letter at the top of the grid
+        // Insert the previous big letter at the top of the grid.
         if (pickedLettersGrid.firstChild) {
           pickedLettersGrid.insertBefore(previousBigLetter, pickedLettersGrid.firstChild);
         } else {
@@ -114,7 +189,7 @@ function addHoverEffects() {
         }
       }
     
-      // Now add the new big letter
+      // Now add the new big letter.
       const pickedLetter = document.createElement("div");
       pickedLetter.textContent = pickedChar;
       pickedLetter.classList.add("picked-letter", "picked-letter-new");
@@ -123,17 +198,15 @@ function addHoverEffects() {
       pickedLettersNew.innerHTML = "";
       pickedLettersNew.appendChild(pickedLetter);
     
-      // Clear the picked letter from the message
+      // Clear the picked letter from the message.
       span.innerHTML = "&nbsp;";
       span.classList.remove("hover-letter");
       span.style.color = "transparent";
       span.style.pointerEvents = "none";
     });
-    
-    
-    
   });
 }
+
 
 $(document).ready(function () {
   let isAboutInFront = false;
@@ -211,7 +284,7 @@ toggleButton.addEventListener('click', () => {
     el.style.display = isVisible ? 'none' : '';
   });
 
-  toggleButton.textContent = isVisible ? 'Show' : '×';
+  toggleButton.textContent = isVisible ? 'Show' : 'Hide';
 });
 
 

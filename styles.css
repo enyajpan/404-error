@@ -26,9 +26,9 @@ body, html {
   padding: 0;
   font-family: sans-serif;
   font-size: 12px;
-  color: rgb(176, 183, 195);
+  color: rgb(115, 115, 118);
   line-height: 1;
-  background-color: rgb(33, 37, 43);
+  background-color: rgb(226,228,235);
 }
 
 * {
@@ -79,7 +79,7 @@ html, body {
   width: 100vw;
   font-size: 5.5rem;
   letter-spacing: -0.3rem;
-  color: rgb(100, 149, 238);
+  color: rgb(169, 169, 170);
   z-index: 1;
   pointer-events: none; /* makes it non-blocking unless you want it to be clickable */
 }
@@ -92,7 +92,7 @@ html, body {
 /* header formatting at top  */
 #fixed-th {
   font-family: 'Gaisyr Book Italic', serif;
-  color: rgb(167, 140, 250);
+  color: rgb(66, 122, 237);
   position: fixed;
   top: 85px;
   width: 97vw;
@@ -117,12 +117,12 @@ html, body {
 .message-column {
   flex: 3;
   font-size: 3rem !important;
-  letter-spacing: -0.1rem;
+  letter-spacing: -0.2rem;
 }
 .info-column {
   flex: 1;
   font-size: 3rem !important;
-  letter-spacing: -0.1rem;
+  letter-spacing: -0.2rem;
   position: absolute;
   right: 150px;
 }
@@ -131,7 +131,7 @@ html, body {
 .entry-subject {
   font-family: Arial, sans-serif;
   font-size: 8rem;
-  color: rgb(176, 183, 195); 
+  color: rgb(184, 204, 249); 
   line-height: 0.7;
   letter-spacing: -0.6rem;
   margin-bottom: 5px;
@@ -247,7 +247,7 @@ i {
   gap: 10px;
   font-family: 'Flowers', sans-serif !important;
   font-size: 10rem;
-  color: rgb(103, 110, 149);
+  color: rgb(83, 160, 82);
   line-height: 1.4;
   padding: 5px;
   margin-bottom: 10px;
@@ -289,7 +289,7 @@ i {
   overflow: visible;
 }
 .message-line {
-  letter-spacing: -1.3rem; /* tighter spacing across whole line */
+  letter-spacing: -0.2rem; /* tighter spacing across whole line */
   line-height: 0.5;
 }
 
@@ -623,6 +623,7 @@ i {
 }
 
 /* submission form css */
+/* submission form css */
 
 #submission-wrapper {
   position: fixed;
@@ -638,10 +639,11 @@ i {
 
 #submission-bg {
   position: absolute;
+  left: 0;
   bottom: 0;
-  width: 100%;
+  width: 88%;
   height: auto;
-  z-index: 8;
+  z-index: 1;
 }
 
 #submission-overlay {
@@ -673,27 +675,27 @@ i {
 
 #submission-form input[name="subject line"],
 #submission-form input[name="author"] {
-  color: rgb(207, 104, 255); 
-  background-color: rgb(210, 214, 221);
+  color: rgb(83, 160, 82); 
   padding: 5px;
-  border: 1px solid rgb(207, 104, 255);
+  border: 1px solid rgb(83, 160, 82);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 4px;
   font-size: 1rem;
 }
 
 #submission-form input[name="subject line"]::placeholder,
 #submission-form input[name="author"]::placeholder {
-  color:rgb(167, 140, 250);
+  color:rgb(169, 169, 170);
   font-size: 1rem;
 }
 #submission-form textarea[name="message"]::placeholder {
-  color: rgb(167, 140, 250);
+  color: rgb(169, 169, 170);
 }
 #submission-form input:focus,
 #submission-form textarea:focus {
   outline: none;
-  border: 1px solid rgb(207, 104, 255); 
-  box-shadow: 0 0 0 2px rgba(255, 70, 178, 0.2); /* optional soft glow */
+  border: 1px solid rgb(83, 160, 82); 
+  box-shadow: 0 0 0 2px rgba(152, 195, 121, 0.3);
 }
 
 #submission-form textarea[name="message"] {
@@ -703,9 +705,9 @@ i {
   width: 600px;
   height: 7rem;
   padding: 6px;
-  color: rgb(207, 104, 255);
-  background-color: rgb(210, 214, 221);
-  border: 1px solid rgb(207, 104, 255);
+  color: rgb(83, 160, 82);
+  border: 1px solid rgb(83, 160, 82);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 4px;
   resize: none;
 }
@@ -724,6 +726,12 @@ i {
   align-items: center;
 }
 
+/* close button settings */
+.submission-hidden {
+  z-index: -10 !important;
+  pointer-events: none !important;
+}
+
 .input-stack {
   width: 100%;
   max-width: 250px; 
@@ -738,7 +746,7 @@ i {
 
 /* submission form error message formatting */
 .error-message {
-  color: rgb(224, 108, 117);
+  color: rgb(205, 96, 105);
   font-size: 0.8rem;
   margin-top: 2px;
   padding-left: 0px;
@@ -763,8 +771,16 @@ i {
   font-family: 'Gaisyr Book Italic', serif;
   font-size: 1.1rem;
   letter-spacing: -0.02em;
-  color: rgb(176, 183, 195);
+  color: rgb(115, 115, 118);
   margin-top: -12px;
+}
+.label-subtitle {
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  color: rgb(66, 122, 237, 0.8);
+  margin-top: 0px;
 }
 
 .label-column {
@@ -778,23 +794,49 @@ i {
 .label-row {
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
   gap: 6px;
   margin-bottom: 10px;
   padding-left: 2px;
 }
 
+/* tooltip */
+.label-text {
+  position: relative;
+  cursor: pointer;
+}
+.label-text::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%; /* position above */
+  left: 80%;
+  transform: translateY(-6px);
+  background: rgba(243, 243, 243, 0.9);
+  color: rgb(66, 122, 237);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 200px;
+  white-space: normal;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px rgba(96, 96, 96, 0.9);
+  display: none;
+  z-index: 10;
+}
+.label-text:hover::after {
+  display: block;
+}
+
+/* checkboxes */ 
 .checkbox-labels {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-
 /* Hide default checkbox */
 .custom-checkbox input[type="checkbox"] {
   display: none;
 }
-
 /* Label setup */
 .custom-checkbox {
   position: relative;
@@ -805,9 +847,8 @@ i {
   user-select: none;
   display: inline-flex;
   align-items: center;
-  color: rgb(210, 214, 221);
+  color: rgb(115, 115, 118);
 }
-
 /* Custom square box */
 .custom-checkbox .checkmark {
   position: absolute;
@@ -815,12 +856,11 @@ i {
   left: 0;
   height: 14px;
   width: 14px;
-  background-color: rgb(210, 214, 221);
-  border: 1px solid rgb(207, 104, 255);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgb(83, 160, 82);
   border-radius: 2px;
   box-sizing: border-box;
 }
-
 /* add checkmark when checked */
 .custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
   content: "";
@@ -829,15 +869,15 @@ i {
   top: -2px;
   width: 5px;
   height: 10px;
-  border: solid rgb(207, 104, 255);
-  border-width: 0 2px 2px 0;
+  border: solid rgb(83, 160, 82);
+  border-width: 0 1.5px 1.5px 0;
   transform: rotate(45deg);
 }
-
 .custom-checkbox:hover .checkmark {
-  background-color: rgb(230, 222, 255);
+  background-color: rgb(236, 238, 245);
 }
 
+/* post button */
 #submission-form button {
   /* color: rgb(0, 89, 255);
   border: 1px solid rgb(0, 89, 255);
@@ -848,9 +888,44 @@ i {
   padding: 0 2px;
   /* font: inherit; */
 }
-
 #submission-form button:hover {
   font-style: italic;
+}
+
+/* close submission form button */
+.close-button {
+  position: absolute;
+  bottom: 100px;
+  right: 210px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(10, 10, 10, 0.6);
+  border-radius: 3px;
+  padding: 1px 4px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.close-button:hover {
+  font-style: italic;
+  background: rgb(232, 232, 232);
+}
+/* New class to move close button to bottom */
+.close-button.bottom-position {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  top: auto; /* override top */
+}
+
+#close-picked-letters {
+  padding: 2px 2px;
+  font-size: 1rem;
+  line-height: 1;
+  height: 20px;
+  width: auto;
+  border-radius: 4px;
+  display: inline-block;     /* prevent stretching */
+  text-align: center;
+  vertical-align: middle;
 }
 
 /* thank you message formatting */
@@ -927,8 +1002,12 @@ i {
   z-index: 10;
   text-shadow: 0 0 10px rgb(0, 115, 255,0.9), 0 0 30px rgba(214, 233, 255, 0.7); /* ✨ BLUE GLOW */ 
 }
-
-
+.highlight-keyword {
+  color: rgb(250, 39, 142);
+  font-style: italic;
+  font-size: 80%;
+  pointer-events: none; /* this is key */
+}
 @keyframes pulseMove {
   0% {
     font-variation-settings: "MOVE" 0;
