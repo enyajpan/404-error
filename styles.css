@@ -1147,7 +1147,8 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  width: 90%;
+  margin-left: 70px;
+  width: 60%;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 20px;
