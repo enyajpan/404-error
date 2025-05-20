@@ -20,8 +20,6 @@
   <img id="picked-letters-bg" src="assets/picked-letters-bg.png" alt="picked letters background" />
 
   <body>
-    <img id="about-overlay" src="assets/about.png" />
-
     <!-- Fixed page title -->
     <div id="fixed-header">
       <a href="https://enyajpan.github.io/in-case-of-loss/" target="_top">
@@ -48,6 +46,38 @@
     
       <!-- ABOUT IMAGE (click toggles z-index only) -->
       <img id="about-overlay" src="assets/about.png" alt="about" />
+
+      <!-- BACKGROUND IMAGE TABS -->
+      <img 
+        id="bg-view-all" 
+        src="assets/view-all-bg.png" 
+        alt="view all background" 
+        oncontextmenu="return false;"
+      />
+      <img id="bg-missed-connections" src="assets/missed-connections-bg.png" alt="missed connections background" oncontextmenu="return false;" />
+      <img id="bg-past-lives" src="assets/past-lives-bg.png" alt="past lives background" oncontextmenu="return false;" />
+      <img id="bg-servant-of-sadness" src="assets/servant-of-sadness-bg.png" alt="servant of sadness background" oncontextmenu="return false;" />
+      <img id="bg-guest-book" src="assets/guest-book-bg.png" alt="guest book background" oncontextmenu="return false;" />
+
+      <a href="https://enyajpan.github.io/in-case-of-loss/" id="link-view-all"></a>
+      <a href="https://enyajpan.github.io/missed-connections/" id="link-missed-connections"></a>
+      <a href="https://enyajpan.github.io/past-lives/" id="link-past-lives"></a>
+      <a href="https://enyajpan.github.io/servant-of-sadness/" id="link-servant-of-sadness"></a>
+      <a href="https://enyajpan.github.io/guest-book/" id="link-guest-book"></a>
+
+      <img 
+        id="about-overlay" 
+        src="assets/about.png" 
+        alt="about the project" 
+        oncontextmenu="return false;"
+      />
+
+      <img 
+        id="todo-overlay" 
+        src="assets/todo.png" 
+        alt="instructions" 
+        oncontextmenu="return false;"
+      />
     </div>
 
     <!-- Entries grid -->
@@ -60,24 +90,30 @@
       <img id="submission-bg" src="assets/submission-form-background.png" alt="submission form background" />
       <div id="submission-overlay">
         <form id="submission-form" novalidate>
+          <!-- Checkboxes -->
           <div class="label-wrapper">
-            <div class="label-title">Select label:</div>
+            <div class="label-title">What type of loss was it?</div>
+            <div class="label-subtitle">(Hover for details)</div>
             <div class="label-column">
               <label class="custom-checkbox">
                 <input type="checkbox" name="label" value="missed-connections" />
-                <span class="checkmark"></span> missed-connections
+                <span class="checkmark"></span>
+                <span class="label-text" data-tooltip="An encounter with another where you briefly connect, experience a spark, but fail to exchange contact information, leading to a desire to reconnect.">missed.connections</span>
               </label>
               <label class="custom-checkbox">
                 <input type="checkbox" name="label" value="past-lives" />
-                <span class="checkmark"></span> past-lives
+                <span class="checkmark"></span>
+                <span class="label-text" data-tooltip="A previously lived life, or perhaps a life in another dimension—the 'what could have been' had you chosen differently. You know you can no longer go back, but you will forever dream and reminisce and carry the longing for a life or version of yourself that could never come true.">past.lives</span>
               </label>
               <label class="custom-checkbox">
                 <input type="checkbox" name="label" value="404-error" />
-                <span class="checkmark"></span> 404-error
+                <span class="checkmark"></span>
+                <span class="label-text" data-tooltip="A broken link, corrupted file, loss of access. When you can no longer find what you're seeking. Perhaps they (it) no longer exist(s), or perhaps they've (it) already severed all ties. Or, maybe it's you the one breaking the link — would you choose to remember or to forget?">404.error</span>
               </label>
               <label class="custom-checkbox">
                 <input type="checkbox" name="label" value="servant-of-sadness" />
-                <span class="checkmark"></span> servant-of-sadness
+                <span class="checkmark"></span>
+                <span class="label-text" data-tooltip="Being consumed by sadness, but holding onto a willingness to find meaning and a glimmer of hope even within the depths of melancholy: As described by Maggie Nelson in Bluets: 1) Who, nowadays, watches the light stream through the walls of her “dark chamber” with the company of a phantasmagoric assistant, or smashes at her eyes to reproduce lost color sensations, or stays up all night watching colored shadows drift across the walls? At times I have done all of these things, but not in service of science, nor of philosophy, not even of poetry. 2) Mostly I have felt myself becoming a servant of sadness. I am still looking for the beauty in that.">servant.of.sadness</span>
               </label>
             </div>
             <span class="error-message" id="error-label"></span>
@@ -91,8 +127,14 @@
             <span class="error-message" id="error-author"></span>
           </div>
 
+          <!-- Message -->
           <div class="message-wrapper">
-            <textarea name="message" placeholder="Write your message here." required></textarea>
+            <textarea 
+              name="message" 
+              placeholder="If you are brave enough to tell the world, what do you feel like you have lost?
+Use this space to tell your story however you wish."
+              required
+            ></textarea>
             <span class="error-message" id="error-message"></span>
           </div>
 

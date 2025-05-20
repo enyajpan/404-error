@@ -87,11 +87,14 @@ html, body {
   -webkit-overflow-scrolling: touch;
   z-index: 2;
 }
+#scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
 
 /* in case of loss please return title formatting */
 #fixed-header {
   position: fixed;
-  top: 2;
+  top: 10px;
   left: 10;
   width: 100vw;
   font-size: 5.5rem;
@@ -207,12 +210,11 @@ html, body {
 }
 
 
-/* Makes the actual content 80% wide and centered */
 #container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 0px;
-  width: 90vw;
+  width: 95vw;
   top: 50px;
   left: 0;
   padding: 0px;
@@ -299,7 +301,7 @@ i {
 
 .entry-message {
   flex: 1;
-  font-size: 5rem;
+  font-size: 6rem;
   line-height: 0 !important;
   letter-spacing: -0.2rem;
   max-width: 100%;
@@ -334,9 +336,24 @@ i {
 #about-overlay {
   position: fixed;
   bottom: 0;
-  right: 20px;
+  right: 2%;
   height: auto;
-  max-height: 97vh;
+  max-height: 97%;
+  width: auto;
+  max-width: 100vw;
+  object-fit: contain;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: auto;
+  cursor: pointer;
+}
+/* #TODO tab */
+#todo-overlay {
+  position: fixed;
+  bottom: 0;
+  right: 9%;
+  height: auto;
+  max-height: 97%;
   width: auto;
   max-width: 100vw;
   object-fit: contain;
@@ -640,18 +657,23 @@ i {
 }
 
 /* submission form css */
-/* submission form css */
 
 #submission-wrapper {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 250px; 
+  height: 250px;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  transition: transform 0.6s ease;
+  transform: translateY(0);
+}
+
+#submission-wrapper.slide-down {
+  transform: translateY(50%);
 }
 
 #submission-bg {
@@ -661,6 +683,13 @@ i {
   width: 88%;
   height: auto;
   z-index: 1;
+  transition: transform 0.5s ease;
+  transform: translateY(0); /* default position */
+  cursor: pointer; /* Optional: show it’s clickable */
+}
+
+#submission-wrapper.slide-down {
+  transform: translateY(50%);
 }
 
 #submission-overlay {
@@ -988,12 +1017,6 @@ i {
   pointer-events: auto;
 }
 
-#view-all-bg {
-  width: 100vw;
-  height: auto;
-  pointer-events: auto; /* allow clicks */
-}
-
 /* character animation */
 .flower-text {
   display: inline-block;
@@ -1017,7 +1040,7 @@ i {
   transition: font-variation-settings 0.5s ease;
   transform: scale(8);
   z-index: 10;
-  text-shadow: 0 0 10px rgb(0, 115, 255,0.9), 0 0 30px rgba(214, 233, 255, 0.7); /* ✨ BLUE GLOW */ 
+  text-shadow: 0 0 10px rgb(0, 115, 255,0.95), 0 0 30px rgba(94, 169, 255, 0.7); 
 }
 .highlight-keyword {
   color: rgb(250, 39, 142);
@@ -1044,9 +1067,10 @@ i {
   max-height: 70vh;
   transform: translate(-50%, -50%);
   font-size: 0.14rem;
-  border: 0px;
+  background-color: rgb(226,228,235);
+  border: 0.0px;
   border-radius: 0.3px; 
-  padding: 0.4px;
+  padding: 0.5px;
   pointer-events: auto;
   z-index: 11;
   cursor: pointer; 
@@ -1164,15 +1188,15 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  margin-left: 70px;
-  width: 60%;
+  margin-left: 45px;
+  width: 75%;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 20px;
 }
 .sort-button {
   font-size: 1rem;
-  padding: 1px 2px;
+  padding: 1px 5px;
   vertical-align: middle;
   border-radius: 3px;
   border: 1px solid rgba(10, 10, 10, 0.6);
@@ -1194,7 +1218,7 @@ i {
   font-size: 1rem;
   border: 1px solid rgba(10, 10, 10, 0.6);
   border-radius: 3px;
-  padding: 1px 4px;
+  padding: 1px 5px;
   cursor: pointer;
   z-index: 9999;
 }
@@ -1222,3 +1246,114 @@ i {
 }
 
 
+/* TAB BACKGROUNDS */
+#bg-view-all {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+#bg-missed-connections {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+#bg-past-lives {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+#bg-servant-of-sadness {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+#bg-guest-book {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+#link-view-all {
+  position: fixed;
+  top: 12%;
+  right: 0%;
+  width: 3%;
+  height: 65px;
+  z-index: 10000;
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+  /* background: rgba(255, 0, 0, 0.2); */ 
+}
+#link-missed-connections {
+  position: fixed;
+  top: 21%;
+  right: 0%;
+  width: 3%;
+  height: 120px;
+  z-index: 10000;
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+  /* background: rgba(255, 0, 0, 0.2);  */
+}
+#link-past-lives {
+  position: fixed;
+  top: 37%;
+  right: 0%;
+  width: 3%;
+  height: 65px;
+  z-index: 10000;
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+  /* background: rgba(255, 0, 0, 0.2);  */
+}
+#link-servant-of-sadness {
+  position: fixed;
+  top: 54%;
+  right: 0%;
+  width: 3%;
+  height: 110px;
+  z-index: 10000;
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+  /* background: rgba(255, 0, 0, 0.2); */ 
+}
+#link-guest-book {
+  position: fixed;
+  bottom: 5%;
+  right: 0%;
+  width: 3%;
+  height: 80px;
+  z-index: 10000;
+  pointer-events: auto;
+  cursor: pointer;
+  display: block;
+  /* background: rgba(255, 0, 0, 0.2); */ 
+}

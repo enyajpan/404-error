@@ -211,9 +211,25 @@ $(document).ready(function () {
   let isAboutInFront = false;
 
   $("#about-overlay").on("click", function () {
+    if (isAboutInFront) {
+      $(this).css("z-index", 0); // move behind
+    } else {
+      $(this).css("z-index", 10001); // move to front
+    }
     isAboutInFront = !isAboutInFront;
-    $(this).css("z-index", isAboutInFront ? 10000 : 0);
   });
+
+  let isTodoInFront = false;
+
+  $("#todo-overlay").on("click", function () {
+    if (isTodoInFront) {
+      $(this).css("z-index", 0); // move behind
+    } else {
+      $(this).css("z-index", 10000); // move to front
+    }
+    isTodoInFront = !isTodoInFront;
+  });
+
 
   makeLinks();
 
@@ -308,44 +324,56 @@ document.getElementById('print-button').addEventListener('click', function () {
   setTimeout(() => {
     const pickedNew = Array.from(document.querySelector('#picked-letters-new').children);
     const pickedGrid = Array.from(document.querySelector('#picked-letters-grid').children);
-    const allPicked = [...pickedNew, ...pickedGrid];
-
+    const pickedLetters = [...pickedNew, ...pickedGrid];
+      
     const rows = 11;
     const cols = 3;
     const totalSlots = rows * cols;
-
-    // Only use up to 33 letters
-    const pickedLetters = allPicked.slice(0, totalSlots);
-
-    // Fill with blanks if fewer than 33
-    while (pickedLetters.length < totalSlots) {
-      const emptyDiv = document.createElement('div');
-      emptyDiv.classList.add('picked-letter');
-      emptyDiv.innerHTML = '&nbsp;';
-      pickedLetters.push(emptyDiv);
+  
+    const chunks = [];
+    for (let i = 0; i < pickedLetters.length; i += totalSlots) {
+      chunks.push(pickedLetters.slice(i, i + totalSlots));
     }
-
-    // Initialize columns
-    const columns = [[], [], []];
-
-    // Assign elements DOWN the columns first
-    for (let i = 0; i < pickedLetters.length; i++) {
-      const colIndex = i % cols; // 0, 1, 2
-      columns[colIndex].push(pickedLetters[i]);
-    }
-
-    // Now re-flatten it: row by row across columns
-    let arranged = '';
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        arranged += columns[col][row]?.outerHTML || '';
+  
+    let allPages = '';
+  
+    chunks.forEach((chunk, pageIndex) => {
+      while (chunk.length < totalSlots) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.classList.add('picked-letter');
+        emptyDiv.innerHTML = '&nbsp;';
+        chunk.push(emptyDiv);
       }
-    }
+  
+      const columns = [[], [], []];
+      for (let i = 0; i < chunk.length; i++) {
+        const colIndex = i % cols;
+        columns[colIndex].push(chunk[i]);
+      }
+  
+      let arranged = '';
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          arranged += columns[col][row]?.outerHTML || '';
+        }
+      }
+  
+      const horizontalOffset = pageIndex % 2 === 0 ? 'right: 90%;' : 'left: 16%;'; // alternate pages
+
+      allPages += `
+        <div class="print-page" style="position: absolute; top: 0; ${horizontalOffset} z-index: ${10 - pageIndex};">
+          <div class="print-container">
+            ${arranged}
+          </div>
+        </div>
+      `;
+
+    });
 
     const printContent = `
       <html>
         <head>
-          <title>Print Picked Letters</title>
+          <title>Print 404 Error</title>
           <style>
             @font-face {
               font-family: 'Flowers';
@@ -425,6 +453,17 @@ document.getElementById('print-button').addEventListener('click', function () {
   }, 600);
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.getElementById('submission-wrapper');
+  const bg = document.getElementById('submission-bg');
+
+  wrapper.addEventListener('click', (event) => {
+    if (event.target === bg) {
+      wrapper.classList.toggle('slide-down');
+    }
+  });
+});
 
 
 
