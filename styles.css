@@ -79,7 +79,7 @@ html, body {
 
 #scroll-wrapper {
   position: absolute;
-  top: 78px; 
+  top: 72px; 
   left: 0;
   right: 0;
   bottom: 0;
@@ -979,7 +979,7 @@ i {
 #thank-you-popup {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -1189,9 +1189,9 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  margin-left: 45px;
+  margin-left: 40px;
   width: 75%;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 10px;
   padding: 0 20px;
 }
